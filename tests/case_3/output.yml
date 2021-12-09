@@ -1,0 +1,132 @@
+product:
+  name: "case-3"
+  short-name: "case"
+  product-page: "baz"
+  development_stage: "development" 
+  release:
+    type: "Y-stream"
+    version: "1.0.0"
+  projects:
+  - name: component-1
+    midstream:
+        type: GerritProject
+        branch: case-1.0-rhel-8
+        project: component-1
+    components:
+    - type: container
+      name: component-1
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      display-name: component-1
+      description: "component-1 component for case product"
+      summary: "component-1 component for case product"
+      builds:
+      - type: brew-container
+        name: component-1
+        product-version: RHEL-8-case-1.0
+        depends-on:
+          - component-2
+        brew-source:
+          repo: containers/component-1
+          ref: case-1.0-rhel-8
+        brew-package: component-1-container
+  - name: component-2
+    midstream:
+        type: GerritProject
+        branch: case-1.0-rhel-8
+        project: component-2
+    components:
+    - type: container
+      name: component-2
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      display-name: component-2
+      description: "component-2 component for case product"
+      summary: "component-2 component for case product"
+      builds:
+      - type: brew-container
+        name: component-2
+        product-version: RHEL-8-case-1.0
+        depends-on:
+          - build1
+        brew-source:
+          repo: containers/component-2
+          ref: case-1.0-rhel-8
+        brew-package: component-2-container
+  - name: component-3
+    midstream:
+        type: GerritProject
+        branch: case-1.0-rhel-8
+        project: foo
+    components:
+    - type: container
+      name: component-3
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      display-name: component-3
+      description: "component-3 component for case product"
+      summary: "component-3 component for case product"
+      builds:
+      - type: brew-container
+        name: component-3
+        product-version: RHEL-8-case-1.0
+        brew-source:
+          repo: containers/component-3
+          ref: case-1.0-rhel-8
+        brew-package: component-3-container
+  - name: component-4
+    midstream:
+        type: GerritProject
+        branch: case-1.0-rhel-8
+        project: component-4
+    components:
+    - type: container
+      name: build1
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      display-name: build1
+      description: "build1 component for case product"
+      summary: "build1 component for case product"
+      builds:
+      - type: brew-container
+        name: build1
+        product-version: RHEL-8-case-1.0
+        brew-source:
+          repo: containers/build1
+          ref: case-1.0-rhel-8
+        brew-package: build1-container
+  - name: component-5
+    midstream:
+        type: GerritProject
+        branch: case-1.0-rhel-8
+        project: component-5
+    components:
+    - type: container
+      name: component-5
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      display-name: component-5
+      description: "component-5 component for case product"
+      summary: "component-5 component for case product"
+      builds:
+      - type: brew-container
+        name: component-5
+        product-version: RHEL-8-case-1.0
+        depends-on:
+          - component-1
+          - component-3
+          - component-5
+        brew-source:
+          repo: containers/component-5
+          ref: case-1.0-rhel-8
+        brew-package: component-5-container

@@ -1,0 +1,27 @@
+---
+components:
+  # advisories: [advisory] # Priority is build, project, product specification
+  midstream:
+        project: "my-midstream-repos"
+  builds:
+    - name: component-1
+      nudges: 
+        - components-bundle
+      dist-git-repo: component-1
+      # advisories: [advisory] # Priority is build, project, product specification
+      # brew-package: component-1-container
+    - name: component-2
+      nudges: 
+        - components-bundle
+      dist-git-repo: component-2
+      # brew-package: component-2-container
+      # type: brew-operator
+      # priority: 80
+    - name: components-bundle
+      owners:
+        - foo@baz.io
+      brew-package: components-bundle-container
+      description: "Bundle for baz"
+      summary: "Bundle for baz"
+      type: brew-operator
+      priority: 80

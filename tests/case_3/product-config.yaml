@@ -1,0 +1,16 @@
+---
+name: case-3
+short-name: case
+product-version: RHEL-8-case-1.0
+product-version-short: 1.0
+product-version-full: 1.0.0
+development-stage: development # `code-freeze` disables auto-polling, `development` enables it
+product-page: baz
+advisories: [advisory] # Priority is build, project, product specification
+use-depends-on: true # Aggregates `nudges` keys to set depends-on lists
+default-nudge:  # The default set of components for a nudge, will be overridden (i.e. not merged) by later specification
+  - component-5
+inject-default-midstream: true # auto injects a midstream if none are defined in the configuration
+inject-default-builds: true # auto injects a builds if none are defined in the configuration
+midstream:
+  branch: "case-1.0-rhel-8"

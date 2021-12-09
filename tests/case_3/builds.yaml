@@ -1,0 +1,14 @@
+---
+component-1:
+component-2:
+  nudges:
+    - component-1
+component-3:
+  midstream:
+    project: foo
+component-4:
+  builds:
+    - name: build1
+      nudges:
+        - component-2
+component-5:

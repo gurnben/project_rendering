@@ -1,0 +1,72 @@
+product:
+  name: "case-1"
+  short-name: "baz"
+  product-page: "google.com"
+  development_stage: "development" 
+  release:
+    type: "Y-stream"
+    version: "0.1.0"
+  projects:
+  - name: components
+    midstream:
+        type: GitLabProject
+        branch: baz-1-rhel-8
+        group: my-midstreams
+        project: my-midstream-repos
+    components:
+    - type: container
+      name: component-1
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      priority: 1
+      display-name: component-1
+      description: "component-1 component for baz product"
+      summary: "component-1 component for baz product"
+      builds:
+      - type: brew-container
+        name: component-1
+        product-version: baz-1-rhel-8
+        brew-source:
+          repo: containers/component-1
+          ref: baz-1-rhel-8
+        brew-package: component-1-container
+    - type: container
+      name: component-2
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      priority: 1
+      display-name: component-2
+      description: "component-2 component for baz product"
+      summary: "component-2 component for baz product"
+      builds:
+      - type: brew-container
+        name: component-2
+        product-version: baz-1-rhel-8
+        brew-source:
+          repo: containers/component-2
+          ref: baz-1-rhel-8
+        brew-package: component-2-container
+    - type: container
+      name: components-bundle
+      advisories:
+      - advisory
+      image-type: layered
+      host-level-access: unprivileged
+      owners:
+      - foo@baz.io
+      priority: 80
+      display-name: components-bundle
+      description: Bundle for baz
+      summary: Bundle for baz
+      builds:
+      - type: brew-operator
+        name: components-bundle
+        product-version: baz-1-rhel-8
+        brew-source:
+          repo: containers/components-bundle
+          ref: baz-1-rhel-8
+        brew-package: components-bundle-container

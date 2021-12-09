@@ -1,0 +1,113 @@
+product:
+  foo: baz
+  name: "{{ product_config['name'] }}"
+  short-name: "{{ product_config['short-name'] }}"
+  product-page: "{{ product_config['product-page'] }}"
+  development_stage: "{{ product_config['development-stage'] }}" 
+  release:
+    type: "Y-stream"
+    version: "{{ product_config['product-version-full'] }}"
+  projects:
+  {%- for project in builds %}
+  {%- if builds[project]['builds'] is iterable %}
+  - name: {{ project }}
+    {%- if builds[project]['midstream'] is defined %}
+    {%- if product_config['midstream'] is defined %}
+    {%- set tmp_midstream = product_config['midstream'] %}
+    {%- do tmp_midstream.update(builds[project]['midstream']) %}
+    midstream:
+    {%- for key, value in tmp_midstream.items() %}
+        {{ key }}: {{ value }}
+    {%- endfor %}
+    {%- else %}
+    midstream:
+        {%- for key, value in builds[project]['midstream'].items() %}
+        {{ key }}: {{ value }}
+    {%- endfor %}
+    {%- endif %}
+    {%- endif %}
+    components:
+    {%- for build in builds[project]['builds'] %}
+    - type: container
+      name: {{ build['name'] }}
+      {%- if build['advisories'] is defined %}
+      advisories:
+      {%- for advisory in build['advisories'] %}
+      - {{ advisory }}
+      {%- endfor %}
+      {%- elif builds[project]['advisories'] is defined %}
+      advisories:
+      {%- for advisory in builds[project]['advisories'] %}
+      - {{ advisory }}
+      {%- endfor %}
+      {%- elif product_config['advisories'] is defined %}
+      advisories:
+      {%- for advisory in product_config['advisories'] %}
+      - {{ advisory }}
+      {%- endfor %}
+      {%- endif %}
+      image-type: layered
+      host-level-access: unprivileged
+      {%- if build['owners'] is defined %}
+      owners:
+      {%- for owner in build['owners'] %}
+      - {{ owner }}
+      {%- endfor %}
+      {%- endif %}
+      {%- if product_config['use-depends-on'] != true %}
+      {%- if build['priority'] is defined %}
+      priority: {{ build['priority'] }}
+      {%- else %}
+      priority: {{ 1 }}
+      {%- endif %}
+      {%- endif %}
+      display-name: {{ build['name'] }}
+      {%- if build['description'] is defined %}
+      description: {{ build['description'] }}
+      {%- else %}
+      description: "{{ build['name'] }} component for {{ product_config['short-name'] }} product"
+      {%- endif %}
+      {%- if build['summary'] is defined %}
+      summary: {{ build['summary'] }}
+      {%- else %}
+      summary: "{{ build['name'] }} component for {{ product_config['short-name'] }} product"
+      {%- endif %}
+      builds:
+      {%- if build['type'] is defined %}
+      - type: {{ build['type'] }}
+      {%- else %}
+      - type: brew-container
+      {%- endif %}
+        name: {{ build['name'] }}
+        {%- if build['ubi-base'] is defined %}
+        product-version: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-{{ build['ubi-base'] }}
+        {%- else %}
+        product-version: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-8
+        {%- endif %}
+        {%- if product_config['use-depends-on'] == true %}
+        {%- if build['depends-on'] is defined%}
+        depends-on:
+        {%- for dependency in build['depends-on'] %}
+          - {{ dependency }}
+        {%- endfor %}
+        {%- endif %}
+        {%- endif %}
+        brew-source:
+          {%- if build['dist-git-repo'] is defined %}
+          repo: containers/{{ build['dist-git-repo'] }}
+          {%- else %}
+          repo: containers/{{ build['name'] }}
+          {%- endif %}
+          {%- if build['ubi-base'] is defined %}
+          ref: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-{{ build['ubi-base'] }}
+          {%- else %}
+          ref: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-8
+          {%- endif %}
+        {%- if build['brew-package'] is defined %}
+        brew-package: {{ build['brew-package'] }}
+        {%- else %}
+        brew-package: {{ build['name'] }}-container
+        {%- endif %}
+      {%- endfor %}
+  {%- endif %}
+  {%- endfor %}

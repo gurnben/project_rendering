@@ -1,0 +1,13 @@
+---
+name: case-1
+short-name: baz
+product-version-short: 1
+product-version-full: 0.1.0
+development-stage: development # `code-freeze` disables auto-polling, `development` enables it
+product-page: google.com
+advisories: [advisory] # Priority is build, project, product specification
+use-depends-on: false # Aggregates `nudges` keys to set depends-on lists
+midstream:
+  type: "GitLabProject"
+  branch: "baz-1-rhel-8"
+  group: "my-midstreams"
