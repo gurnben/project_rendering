@@ -20,6 +20,8 @@ product:
       - advisory
       image-type: layered
       host-level-access: unprivileged
+      owners:
+      - wolf@brick.house
       priority: 1
       display-name: component-1
       description: "component-1 component for baz product"
@@ -38,6 +40,8 @@ product:
       - advisory
       image-type: layered
       host-level-access: unprivileged
+      owners:
+      - wolf@brick.house
       priority: 1
       display-name: component-2
       description: "component-2 component for baz product"

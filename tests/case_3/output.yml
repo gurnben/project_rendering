@@ -9,7 +9,7 @@ product:
   projects:
   - name: component-1
     midstream:
-        type: GerritProject
+        type: GitLabProject
         branch: case-1.0-rhel-8
         project: component-1
     components:
@@ -34,7 +34,7 @@ product:
         brew-package: component-1-container
   - name: component-2
     midstream:
-        type: GerritProject
+        type: GitLabProject
         branch: case-1.0-rhel-8
         project: component-2
     components:
@@ -59,7 +59,7 @@ product:
         brew-package: component-2-container
   - name: component-3
     midstream:
-        type: GerritProject
+        type: GitLabProject
         branch: case-1.0-rhel-8
         project: foo
     components:
@@ -69,6 +69,8 @@ product:
       - advisory
       image-type: layered
       host-level-access: unprivileged
+      owners:
+      - foo@baz.trip
       display-name: component-3
       description: "component-3 component for case product"
       summary: "component-3 component for case product"
@@ -82,7 +84,7 @@ product:
         brew-package: component-3-container
   - name: component-4
     midstream:
-        type: GerritProject
+        type: GitLabProject
         branch: case-1.0-rhel-8
         project: component-4
     components:
@@ -92,6 +94,8 @@ product:
       - advisory
       image-type: layered
       host-level-access: unprivileged
+      owners:
+      - wolf@brick.house
       display-name: build1
       description: "build1 component for case product"
       summary: "build1 component for case product"
@@ -105,7 +109,7 @@ product:
         brew-package: build1-container
   - name: component-5
     midstream:
-        type: GerritProject
+        type: GitLabProject
         branch: case-1.0-rhel-8
         project: component-5
     components:

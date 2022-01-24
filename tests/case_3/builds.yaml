@@ -4,11 +4,16 @@ component-2:
   nudges:
     - component-1
 component-3:
+  owners: [foo@baz.trip]
   midstream:
     project: foo
 component-4:
+  owners:
+    - foo@baz.biz # should be ignored
   builds:
     - name: build1
+      owners:
+        - wolf@brick.house
       nudges:
         - component-2
 component-5:

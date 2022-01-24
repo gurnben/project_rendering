@@ -1,5 +1,6 @@
 ---
 components:
+  owners: [wolf@brick.house]
   # advisories: [advisory] # Priority is build, project, product specification
   midstream:
         project: "my-midstream-repos"

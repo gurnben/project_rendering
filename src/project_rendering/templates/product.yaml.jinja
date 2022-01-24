@@ -52,6 +52,11 @@ product:
       {%- for owner in build['owners'] %}
       - {{ owner }}
       {%- endfor %}
+      {%- elif builds[project]['owners'] is defined %}
+      owners:
+      {%- for owner in builds[project]['owners'] %}
+      - {{ owner }}
+      {%- endfor %}
       {%- endif %}
       {%- if product_config['use-depends-on'] != true %}
       {%- if build['priority'] is defined %}

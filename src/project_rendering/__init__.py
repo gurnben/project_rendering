@@ -58,65 +58,70 @@ def render_project(arg_dict):
 
     template = Template(template_content, extensions=['jinja2.ext.do'])
 
+    # Lump as many tasks together in this first iteration as possible
+    #       but only iterate if needed
+    # - injecting midstream
+    # - injecting builds
+    # - gathering dependencies
+
     # To allow lazier filling of the builds, we allow for default midstream/builds to be injected
     inject_midstream = product_config.setdefault('inject-default-midstream', False)
     inject_builds = product_config.setdefault('inject-default-builds', False)
-    if inject_midstream or inject_builds:
-        # print(builds)
+
+    # allow specification of nudges on components for easier depends-on leveraging nudges
+    use_depends_on = product_config.setdefault('use-depends-on', False)
+    build_names = set()
+    duplicate_names = set()
+    nudge_map = {}
+    project_map = {}
+    default_nudges = set(product_config.get('default-nudge', []))
+
+    # print(builds)
+    if inject_builds or inject_builds or use_depends_on:
         for project in builds:
+            # protect agains an undefined build in case we are using a default
             builds[project] = {} if builds[project] is None else builds[project]
-            # print(project)
-            # print(builds[project])
             if inject_midstream:
                 builds[project].setdefault('midstream', {'project': project})
-                # if builds[project].setdefault('midstream', []) is not None:
-                #     builds[project]['midstream'].setdefault('project', project)
             if inject_builds:
                 builds[project].setdefault('builds', [{'name': project}])
 
-    if product_config.get('use-depends-on', False):
-        # Let's parse the builds to create the depends-on relationships instead of using priorities
-        # By basing all build names looking for the `nudges` key
+            if use_depends_on:
+                project_default_nudge = default_nudges
+                if builds[project].get('nudges', []):
+                    project_default_nudge = builds[project]['nudges']
+                # print('project: {}'.format(project))
+                component_index = 0
+                for component in builds[project]['builds']:
+                    # print('component: {}'.format(component))
+                    component_name = component.get('name')
+                    project_map[component_name] = (project, component_index)
+                    # print('component_name: {}'.format(component_name))
+                    if component_name not in build_names:
+                        build_names.add(component_name)
+                    else:
+                        duplicate_names.add(component_name)
+                    component_nudges = project_default_nudge
+                    if component.get('nudges', []):
+                        component_nudges = component['nudges']
+                    if component_nudges:
+                        for nudge in set(component_nudges):
+                            nudge_map.setdefault(nudge, []).append(component_name)
+                    component_index += 1
 
-        # All names should be unique in order for this to work
-        build_names = set()
-        duplicate_names = set()
-        nudge_map = {}
-        default_nudges = set(product_config.get('default-nudge', []))
-
-        # print(builds)
-        for project in builds:
-            project_default_nudge = default_nudges
-            if builds[project].get('nudges', []):
-                project_default_nudge = builds[project]['nudges']
-            # print('project: {}'.format(project))
-            for component in builds[project]['builds']:
-                # print('component: {}'.format(component))
-                component_name = component.get('name')
-                # print('component_name: {}'.format(component_name))
-                if component_name not in build_names:
-                    build_names.add(component_name)
-                else:
-                    duplicate_names.add(component_name)
-                component_nudges = project_default_nudge
-                if component.get('nudges', []):
-                    component_nudges = component['nudges']
-                if component_nudges:
-                    for nudge in set(component_nudges):
-                        nudge_map.setdefault(nudge, []).append(component_name)
-
-        if len(duplicate_names) != 0:
-            raise(Exception('Depends-on cannot be used; duplicate names detected: {}'.format(duplicate_names)))
+            if len(duplicate_names) != 0:
+                raise(Exception('Depends-on cannot be used; duplicate names detected: {}'.format(duplicate_names)))
 
     # print(builds)
+    # if we are using depends-on nudges, iterate again to set the dependencies
+    if use_depends_on:
         for project in builds:
             # print('project: {}'.format(project))
-            for component in builds[project]['builds']:
-                # print('component: {}'.format(component))
-                component_name = component.get('name')
-                dependent_components = nudge_map.get(component_name, None)
-                if dependent_components is not None:
-                    component['depends-on'] = dependent_components
+            for component, dependencies in nudge_map.items():
+                component_project, component_index = project_map[component]
+                if builds[component_project]['builds'][component_index]['name'] != component:
+                    raise(Exception('Mismatch between component name and index'))
+                builds[component_project]['builds'][component_index]['depends-on'] = dependencies
 
     with open(arg_dict["product_output"], "w") as stream:
         stream.write(template.render(builds=builds, product_config=product_config))

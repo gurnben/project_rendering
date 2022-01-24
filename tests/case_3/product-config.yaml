@@ -13,4 +13,5 @@ default-nudge:  # The default set of components for a nudge, will be overridden 
 inject-default-midstream: true # auto injects a midstream if none are defined in the configuration
 inject-default-builds: true # auto injects a builds if none are defined in the configuration
 midstream:
+  type: "GitLabProject"
   branch: "case-1.0-rhel-8"
