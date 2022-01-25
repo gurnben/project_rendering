@@ -4,6 +4,7 @@ short-name: case
 product-version: RHEL-8-case-1.0
 product-version-short: 1.0
 product-version-full: 1.0.0
+release-type: throw-the-discus
 development-stage: development # `code-freeze` disables auto-polling, `development` enables it
 product-page: baz
 advisories: [advisory] # Priority is build, project, product specification

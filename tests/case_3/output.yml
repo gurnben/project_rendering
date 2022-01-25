@@ -4,7 +4,7 @@ product:
   product-page: "baz"
   development_stage: "development" 
   release:
-    type: "Y-stream"
+    type: "throw-the-discus"
     version: "1.0.0"
   projects:
   - name: component-1

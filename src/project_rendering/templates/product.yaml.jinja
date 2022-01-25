@@ -4,7 +4,11 @@ product:
   product-page: "{{ product_config['product-page'] }}"
   development_stage: "{{ product_config['development-stage'] }}" 
   release:
+  {%- if product_config['release-type'] is defined %}
+    type: "{{ product_config['release-type'] }}"
+  {%- else %}
     type: "Y-stream"
+  {%- endif %}
     version: "{{ product_config['product-version-full'] }}"
   projects:
   {%- for project in builds %}

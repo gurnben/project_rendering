@@ -1,5 +1,9 @@
 # Versions and changelog information
 
+## 0.0.3
+
+* Allow release-type customizations
+
 ## 0.0.2
 
 * Add ability to specify default owners on a project level
