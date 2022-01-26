@@ -78,31 +78,36 @@ def render_project(arg_dict):
 
     # print(builds)
     if inject_builds or inject_builds or use_depends_on:
-        for project in builds:
+        for project_name, project in builds.items():
             # protect agains an undefined build in case we are using a default
-            builds[project] = {} if builds[project] is None else builds[project]
+            builds[project_name] = {} if project is None else project
             if inject_midstream:
-                builds[project].setdefault('midstream', {'project': project})
+                builds[project_name].setdefault('midstream', {'project': project_name})
             if inject_builds:
-                builds[project].setdefault('builds', [{'name': project}])
+                builds[project_name].setdefault('builds', [{'name': project_name}])
 
             if use_depends_on:
                 project_default_nudge = default_nudges
-                if builds[project].get('nudges', []):
-                    project_default_nudge = builds[project]['nudges']
+                if builds[project_name].get('nudges', []):
+                    project_default_nudge = builds[project_name]['nudges']
                 # print('project: {}'.format(project))
                 component_index = 0
-                for component in builds[project]['builds']:
+                for component in builds[project_name]['builds']:
                     # print('component: {}'.format(component))
                     component_name = component.get('name')
-                    project_map[component_name] = (project, component_index)
+                    project_map[component_name] = (project_name, component_index)
                     # print('component_name: {}'.format(component_name))
                     if component_name not in build_names:
                         build_names.add(component_name)
                     else:
                         duplicate_names.add(component_name)
                     component_nudges = project_default_nudge
-                    if component.get('nudges', []):
+                    # Allow nudge bails if we don't want this to nudge anything
+                    # and a default is set -- by providing a non-list
+                    if type(component.setdefault('nudges', [])) is not list:
+                        print(f'`nudges` is not a list for build named {component_name}; skipping nudge.')
+                        continue
+                    elif component['nudges']:
                         component_nudges = component['nudges']
                     if component_nudges:
                         for nudge in set(component_nudges):

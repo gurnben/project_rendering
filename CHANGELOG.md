@@ -1,5 +1,9 @@
 # Versions and changelog information
 
+## 0.0.4
+
+* Allow skipping nudges for a component when leveraging default nudges
+
 ## 0.0.3
 
 * Allow release-type customizations

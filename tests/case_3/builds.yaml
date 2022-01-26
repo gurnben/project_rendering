@@ -7,6 +7,9 @@ component-3:
   owners: [foo@baz.trip]
   midstream:
     project: foo
+  builds:
+    - name: component-3
+      nudges: None
 component-4:
   owners:
     - foo@baz.biz # should be ignored
