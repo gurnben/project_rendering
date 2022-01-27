@@ -128,7 +128,6 @@ product:
         product-version: RHEL-8-case-1.0
         depends-on:
           - component-1
-          - component-5
         brew-source:
           repo: containers/component-5
           ref: case-1.0-rhel-8

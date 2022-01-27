@@ -1,5 +1,7 @@
 # Versions and changelog information
 
+* Prevent components from nudging themselves
+
 ## 0.0.4
 
 * Allow skipping nudges for a component when leveraging default nudges

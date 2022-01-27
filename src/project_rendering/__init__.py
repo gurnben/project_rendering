@@ -111,7 +111,8 @@ def render_project(arg_dict):
                         component_nudges = component['nudges']
                     if component_nudges:
                         for nudge in set(component_nudges):
-                            nudge_map.setdefault(nudge, []).append(component_name)
+                            if nudge != component_name:
+                                nudge_map.setdefault(nudge, []).append(component_name)
                     component_index += 1
 
             if len(duplicate_names) != 0:
