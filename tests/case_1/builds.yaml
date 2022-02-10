@@ -10,12 +10,12 @@ components:
         - components-bundle
       dist-git-repo: component-1
       # advisories: [advisory] # Priority is build, project, product specification
-      # brew-package: component-1-container
+      # brew-package: baz-component-1-container # will have short-name prepended
     - name: component-2
       nudges: 
         - components-bundle
       dist-git-repo: component-2
-      # brew-package: component-2-container
+      # brew-package: baz-component-2-container # will have short-name prepended
       # type: brew-operator
       # priority: 80
     - name: components-bundle

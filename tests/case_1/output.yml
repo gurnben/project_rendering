@@ -33,7 +33,7 @@ product:
         brew-source:
           repo: containers/component-1
           ref: baz-1-rhel-8
-        brew-package: component-1-container
+        brew-package: baz-component-1-container
     - type: container
       name: component-2
       advisories:
@@ -53,7 +53,7 @@ product:
         brew-source:
           repo: containers/component-2
           ref: baz-1-rhel-8
-        brew-package: component-2-container
+        brew-package: baz-component-2-container
     - type: container
       name: components-bundle
       advisories:
@@ -71,6 +71,6 @@ product:
         name: components-bundle
         product-version: baz-1-rhel-8
         brew-source:
-          repo: containers/components-bundle
+          repo: containers/baz-components-bundle
           ref: baz-1-rhel-8
         brew-package: components-bundle-container

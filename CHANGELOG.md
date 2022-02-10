@@ -1,5 +1,8 @@
 # Versions and changelog information
 
+* Remove conditionals around loop; we will always loop through the builds once
+* Enable short name to be prepended to undefined brew ref and package names
+* Default 0th build name to project name
 * Prevent components from nudging themselves
 
 ## 0.0.4

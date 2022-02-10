@@ -7,5 +7,6 @@ if __name__ == '__main__':
     try:
         # convert to a dictionary and resubmit
         project_rendering.render_project(vars(parsed_args))
-    except KeyError:
+    except KeyError as e:
         product_parser.print_usage()
+        raise(e)

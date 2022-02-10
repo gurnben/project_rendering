@@ -7,6 +7,7 @@ development-stage: development # `code-freeze` disables auto-polling, `developme
 product-page: google.com
 advisories: [advisory] # Priority is build, project, product specification
 use-depends-on: false # Aggregates `nudges` keys to set depends-on lists
+prepend-short-name-to-brew: true # prepends shortname to unspecified brew repos and packages
 midstream:
   type: "GitLabProject"
   branch: "baz-1-rhel-8"
