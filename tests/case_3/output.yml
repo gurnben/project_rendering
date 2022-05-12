@@ -2,7 +2,7 @@ product:
   name: "case-3"
   short-name: "case"
   product-page: "baz"
-  development_stage: "development" 
+  development_stage: "development"
   release:
     type: "throw-the-discus"
     version: "1.0.0"

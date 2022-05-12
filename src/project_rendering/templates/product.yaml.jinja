@@ -3,6 +3,11 @@ product:
   short-name: "{{ product_config['short-name'] }}"
   product-page: "{{ product_config['product-page'] }}"
   development_stage: "{{ product_config['development-stage'] }}" 
+  {%- if product_config['additional-configurations'] is defined %}
+  {%- for key, value in product_config['additional-configurations'].items() %}
+  {{ key }}: {{ value }}
+  {%- endfor %}
+  {%- endif %}
   release:
   {%- if product_config['release-type'] is defined %}
     type: "{{ product_config['release-type'] }}"
@@ -79,6 +84,11 @@ product:
       summary: {{ build['summary'] }}
       {%- else %}
       summary: "{{ build['name'] }} component for {{ product_config['short-name'] }} product"
+      {%- endif %}
+      {%- if build['additional-configurations'] is defined %}
+      {%- for key, value in build['additional-configurations'].items() %}
+      {{ key }}: {{ value }}
+      {%- endfor %}
       {%- endif %}
       builds:
       {%- if build['type'] is defined %}

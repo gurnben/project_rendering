@@ -2,7 +2,9 @@ product:
   name: "case-1"
   short-name: "baz"
   product-page: "google.com"
-  development_stage: "development" 
+  development_stage: "development"
+  key1: value1
+  key2: ['item1', 'item2']
   release:
     type: "Y-stream"
     version: "0.1.0"
@@ -66,6 +68,8 @@ product:
       display-name: components-bundle
       description: Bundle for baz
       summary: Bundle for baz
+      key1: value1
+      key2: ['item1', 'item2']
       builds:
       - type: brew-operator
         name: components-bundle

@@ -12,3 +12,8 @@ midstream:
   type: "GitLabProject"
   branch: "baz-1-rhel-8"
   group: "my-midstreams"
+additional-configurations:
+  key1: value1
+  key2:
+    - item1
+    - item2
