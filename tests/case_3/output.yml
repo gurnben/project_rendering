@@ -17,7 +17,6 @@ product:
       name: component-1
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       display-name: component-1
       description: "component-1 component for case product"
@@ -42,7 +41,6 @@ product:
       name: component-2
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       display-name: component-2
       description: "component-2 component for case product"
@@ -67,7 +65,6 @@ product:
       name: component-3
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       owners:
       - foo@baz.trip
@@ -92,7 +89,6 @@ product:
       name: build1
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       owners:
       - wolf@brick.house
@@ -117,7 +113,6 @@ product:
       name: component-5
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       display-name: component-5
       description: "component-5 component for case product"
