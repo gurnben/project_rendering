@@ -1,5 +1,3 @@
-#!/bin/python3
-
 import project_rendering
 
 if __name__ == '__main__':
