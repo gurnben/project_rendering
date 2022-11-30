@@ -20,7 +20,6 @@ product:
       name: component-1
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       owners:
       - wolf@brick.house
@@ -40,7 +39,6 @@ product:
       name: component-2
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       owners:
       - wolf@brick.house
@@ -60,7 +58,6 @@ product:
       name: components-bundle
       advisories:
       - advisory
-      image-type: layered
       host-level-access: unprivileged
       owners:
       - foo@baz.io

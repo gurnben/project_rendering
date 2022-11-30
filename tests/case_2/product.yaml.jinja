@@ -46,7 +46,6 @@ product:
       - {{ advisory }}
       {%- endfor %}
       {%- endif %}
-      image-type: layered
       host-level-access: unprivileged
       {%- if build['owners'] is defined %}
       owners:
