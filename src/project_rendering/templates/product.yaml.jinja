@@ -54,7 +54,6 @@ product:
       - {{ advisory }}
       {%- endfor %}
       {%- endif %}
-      host-level-access: unprivileged
       {%- if build['owners'] is defined %}
       owners:
       {%- for owner in build['owners'] %}
@@ -72,17 +71,6 @@ product:
       {%- else %}
       priority: {{ 1 }}
       {%- endif %}
-      {%- endif %}
-      display-name: {{ build['name'] }}
-      {%- if build['description'] is defined %}
-      description: {{ build['description'] }}
-      {%- else %}
-      description: "{{ build['name'] }} component for {{ product_config['short-name'] }} product"
-      {%- endif %}
-      {%- if build['summary'] is defined %}
-      summary: {{ build['summary'] }}
-      {%- else %}
-      summary: "{{ build['name'] }} component for {{ product_config['short-name'] }} product"
       {%- endif %}
       {%- if build['additional-configurations'] is defined %}
       {%- for key, value in build['additional-configurations'].items() %}
