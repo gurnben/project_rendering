@@ -19,7 +19,6 @@ product:
       name: component-1
       advisories:
       - advisory
-      host-level-access: unprivileged
       display-name: component-1
       description: "component-1 component for baz product"
       summary: "component-1 component for baz product"
@@ -35,7 +34,6 @@ product:
       name: component-2
       advisories:
       - advisory
-      host-level-access: unprivileged
       display-name: component-2
       description: "component-2 component for baz product"
       summary: "component-2 component for baz product"
@@ -51,7 +49,6 @@ product:
       name: components-bundle
       advisories:
       - advisory
-      host-level-access: unprivileged
       owners:
       - foo@baz.io
       display-name: components-bundle

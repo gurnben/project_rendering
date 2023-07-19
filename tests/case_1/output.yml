@@ -20,13 +20,9 @@ product:
       name: component-1
       advisories:
       - advisory
-      host-level-access: unprivileged
       owners:
       - wolf@brick.house
       priority: 1
-      display-name: component-1
-      description: "component-1 component for baz product"
-      summary: "component-1 component for baz product"
       builds:
       - type: brew-container
         name: component-1
@@ -39,13 +35,9 @@ product:
       name: component-2
       advisories:
       - advisory
-      host-level-access: unprivileged
       owners:
       - wolf@brick.house
       priority: 1
-      display-name: component-2
-      description: "component-2 component for baz product"
-      summary: "component-2 component for baz product"
       builds:
       - type: brew-container
         name: component-2
@@ -58,13 +50,9 @@ product:
       name: components-bundle
       advisories:
       - advisory
-      host-level-access: unprivileged
       owners:
       - foo@baz.io
       priority: 80
-      display-name: components-bundle
-      description: Bundle for baz
-      summary: Bundle for baz
       key1: value1
       key2: ['item1', 'item2']
       builds:

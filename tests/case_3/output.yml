@@ -17,10 +17,6 @@ product:
       name: component-1
       advisories:
       - advisory
-      host-level-access: unprivileged
-      display-name: component-1
-      description: "component-1 component for case product"
-      summary: "component-1 component for case product"
       builds:
       - type: brew-container
         name: component-1
@@ -41,10 +37,6 @@ product:
       name: component-2
       advisories:
       - advisory
-      host-level-access: unprivileged
-      display-name: component-2
-      description: "component-2 component for case product"
-      summary: "component-2 component for case product"
       builds:
       - type: brew-container
         name: component-2
@@ -65,12 +57,8 @@ product:
       name: component-3
       advisories:
       - advisory
-      host-level-access: unprivileged
       owners:
       - foo@baz.trip
-      display-name: component-3
-      description: "component-3 component for case product"
-      summary: "component-3 component for case product"
       builds:
       - type: brew-container
         name: component-3
@@ -89,12 +77,8 @@ product:
       name: build1
       advisories:
       - advisory
-      host-level-access: unprivileged
       owners:
       - wolf@brick.house
-      display-name: build1
-      description: "build1 component for case product"
-      summary: "build1 component for case product"
       builds:
       - type: brew-container
         name: build1
@@ -113,10 +97,6 @@ product:
       name: component-5
       advisories:
       - advisory
-      host-level-access: unprivileged
-      display-name: component-5
-      description: "component-5 component for case product"
-      summary: "component-5 component for case product"
       builds:
       - type: brew-container
         name: component-5
