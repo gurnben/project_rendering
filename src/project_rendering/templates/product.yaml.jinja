@@ -90,6 +90,8 @@ product:
         product-version: {{ product_config['product-version'] }}
         {%- elif build['ubi-base'] is defined %}
         product-version: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-{{ build['ubi-base'] }}
+        {%- elif product_config['ubi-base'] is defined %}
+        product-version: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-{{ product_config['ubi-base'] }}
         {%- else %}
         product-version: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-8
         {%- endif %}
@@ -109,6 +111,8 @@ product:
           {%- endif %}
           {%- if build['ubi-base'] is defined %}
           ref: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-{{ build['ubi-base'] }}
+          {%- elif product_config['ubi-base'] is defined %}
+          ref: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-{{ product_config['ubi-base'] }}
           {%- else %}
           ref: {{ product_config['short-name'] }}-{{ product_config['product-version-short'] }}-rhel-8
           {%- endif %}
